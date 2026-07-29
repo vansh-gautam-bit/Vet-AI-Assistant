@@ -2,7 +2,7 @@ from langchain_core.tools import tool
 from app.services.api_client import api_client
 
 @tool 
-def get_all_owner():
+def get_all_owners():
     """
     Retrieve all owners from the Vetrinary Management System.
     """
