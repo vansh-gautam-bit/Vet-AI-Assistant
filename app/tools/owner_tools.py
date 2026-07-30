@@ -6,7 +6,7 @@ def get_all_owners():
     """
     Retrieve all owners from the Vetrinary Management System.
     """
-    return api_client.get("/owners")
+    return api_client.get("/owners/")
 
 @tool
 def get_owner_by_id(owner_id: int):
@@ -22,11 +22,16 @@ def find_owner_by_name(name: str):
     Returns the matching owner if found.
     """
 
-    owners = api_client.get("/owners")
+    owners = api_client.get("/owners/")
+
+    matches = []
 
     for owner in owners:
-        if owner["name"].strip().lower() == name.strip().lower():
-            return owner
+        if name.strip().lower() in owner["name"].strip().lower():
+            matches.append(owner)
+
+    if matches:
+        return matches        
 
     return {
         "message": f"No owner found with name '{name}'."

@@ -3,7 +3,7 @@ from app.tools.pet_tools import *
 from app.tools.visit_tools import *
 
 TOOLS = [
-    # Owner Tools
+   
     get_all_owners,
     get_owner_by_id,
     find_owner_by_name,
@@ -11,15 +11,13 @@ TOOLS = [
     update_owner,
     delete_owner,
 
-    # Pet Tools
     get_all_pets,
     get_pet_by_id,
     find_pet_by_name,
     create_pet,
     update_pet,
     delete_pet,
-
-    # Visit Tools
+    
     create_visit,
     get_pet_visits,
     update_visit,

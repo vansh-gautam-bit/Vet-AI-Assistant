@@ -38,9 +38,10 @@ class APIClient:
         if self.token is None:
             self.login()
 
-            return {
-                "Authorization": f"Bearer {self.token}"
+        return {
+            "Authorization": f"Bearer {self.token}"
             }
+    
     def get(self, endpoint: str, params: dict | None = None):
         response = self.client.get(
             endpoint,

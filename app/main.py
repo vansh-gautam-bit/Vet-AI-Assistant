@@ -2,28 +2,33 @@ from fastapi import FastAPI
 from app.agent import agent
 from app.schemas.request import ChatRequest
 from app.schemas.response import ChatResponse
+from app.services.agent_service import chat
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Vet AI Assistant"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "https://vet-pals-clinic.lovable.app",
+        "https://ae1d4e9b-122a-4bd8-9264-b23ac7416bfb.lovableproject.com",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.post(
     "/chat",
     response_model=ChatResponse,
 )
-async def chat(request: ChatRequest):
+async def chatbot(request: ChatRequest):
 
-    result = agent.invoke(
-        {
-            "message": [
-                {
-                    "role": "user",
-                    "content": request.message,
-                }
-            ]
-        }
-    )
+    response = chat(request.message)
 
     return ChatResponse(
-        response=result["message"][-1].content
+        response=response
     )
